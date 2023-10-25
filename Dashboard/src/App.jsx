@@ -1,4 +1,7 @@
 import { Admin, Resource } from "react-admin";
+import i18nProvider from "../i18n/i18nProvider";
+
+//Resources
 import {
 	UserList,
 	UserEdit,
@@ -12,7 +15,10 @@ import "./App.css";
 function App() {
 	return (
 		<>
-			<Admin darkTheme={{ palette: { mode: "dark" } }}>
+			<Admin
+				darkTheme={{ palette: { mode: "dark" } }}
+				i18nProvider={i18nProvider}
+			>
 				<Resource
 					name="users"
 					list={UserList}
