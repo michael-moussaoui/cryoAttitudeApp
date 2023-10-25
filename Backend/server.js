@@ -38,6 +38,10 @@ app.get("/", (req, res) => {
 	res.json({ message: "Welcome to Attitude Cryo." });
 });
 
+const userRoutes = require("./routes/user.routes");
+
+app.use(userRoutes);
+
 const db = require("./models");
 
 db.sequelize.sync();
