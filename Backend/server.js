@@ -40,9 +40,13 @@ app.get("/", (req, res) => {
 
 const userRoutes = require("./routes/user.routes");
 const categoryRoutes = require("./routes/category.routes");
+const sessionRoutes = require("./routes/session.routes");
+const objectiveRoutes = require("./routes/objective.routes");
 
 app.use(userRoutes);
 app.use(categoryRoutes);
+app.use(sessionRoutes);
+app.use(objectiveRoutes);
 
 const db = require("./models");
 
