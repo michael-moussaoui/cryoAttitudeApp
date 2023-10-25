@@ -43,12 +43,14 @@ const categoryRoutes = require("./routes/category.routes");
 const sessionRoutes = require("./routes/session.routes");
 const objectiveRoutes = require("./routes/objective.routes");
 const objectiveChoiceRoutes = require("./routes/objectiveChoice.routes");
+const orientationRoutes = require("./routes/orientation.routes");
 
 app.use(userRoutes);
 app.use(categoryRoutes);
 app.use(sessionRoutes);
 app.use(objectiveRoutes);
 app.use(objectiveChoiceRoutes);
+app.use(orientationRoutes);
 
 const db = require("./models");
 
