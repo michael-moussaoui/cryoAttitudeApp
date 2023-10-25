@@ -35,21 +35,28 @@ module.exports = (sequelize) => {
 				allowNull: false,
 				validate: {
 					notEmpty: true,
-					isStrongPassword(value) {
-						if (
-							!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(
-								value
-							)
-						) {
-							throw new Error(
-								"Le mot de passe doit contenir au moins 6 caractères, au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial (@$!%*?&)."
-							);
-						}
-					},
+					// isStrongPassword(value) {
+					// 	if (
+					// 		!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(
+					// 			value
+					// 		)
+					// 	) {
+					// 		throw new Error(
+					// 			"Le mot de passe doit contenir au moins 6 caractères, au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial (@$!%*?&)."
+					// 		);
+					// 	}
+					// },
 				},
 			},
-			isAdmin: {
-				type: DataTypes.BOOLEAN,
+
+			role: {
+				type: DataTypes.STRING,
+				validate: {
+					isIn: {
+						args: [["user", "manager", "admin"]],
+						msg: "Please specify user role (user, manager or admin)",
+					},
+				},
 			},
 		},
 

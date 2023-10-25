@@ -47,6 +47,7 @@ db.sessionPicture = require("../models/sessionPicture.model.js")(
 	sequelize,
 	Sequelize
 );
+db.role = require("../models/role.model.js")(sequelize, Sequelize);
 
 db.user.hasMany(db.sessionPicture);
 db.user.hasMany(db.session);
@@ -63,5 +64,8 @@ db.objectiveChoice.belongsTo(db.objective, {
 db.objectiveChoice.belongsTo(db.orientation, {
 	foreignKey: "id_orientation",
 });
+
+db.user.belongsToMany(db.role, { through: "userRoles" });
+db.role.belongsToMany(db.user, { through: "userRoles" });
 
 module.exports = db;

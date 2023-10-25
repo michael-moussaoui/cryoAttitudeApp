@@ -38,19 +38,25 @@ app.get("/", (req, res) => {
 	res.json({ message: "Welcome to Attitude Cryo." });
 });
 
+const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes");
 const categoryRoutes = require("./routes/category.routes");
 const sessionRoutes = require("./routes/session.routes");
 const objectiveRoutes = require("./routes/objective.routes");
 const objectiveChoiceRoutes = require("./routes/objectiveChoice.routes");
 const orientationRoutes = require("./routes/orientation.routes");
+const sessionPictureRoutes = require("./routes/sessionPicture.routes");
+const rolesroutes = require("./routes/role.routes");
 
+app.use(authRoutes);
 app.use(userRoutes);
 app.use(categoryRoutes);
 app.use(sessionRoutes);
 app.use(objectiveRoutes);
 app.use(objectiveChoiceRoutes);
 app.use(orientationRoutes);
+app.use(sessionPictureRoutes);
+app.use(rolesroutes);
 
 const db = require("./models");
 

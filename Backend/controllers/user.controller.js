@@ -32,7 +32,7 @@ const UserController = {
 					"firstname",
 					"lastname",
 					"username",
-					"isAdmin",
+					"role",
 					"email",
 				],
 				where: {
@@ -47,14 +47,8 @@ const UserController = {
 
 	async addUser(req, res) {
 		try {
-			const {
-				firstname,
-				lastname,
-				username,
-				email,
-				password,
-				isAdmin,
-			} = req.body;
+			const { firstname, lastname, username, email, password, role } =
+				req.body;
 
 			// Vérification si l'utilisateur existe déjà
 			const existingUser = await User.findOne({ where: { email } });
@@ -73,7 +67,7 @@ const UserController = {
 				username,
 				email,
 				password: hashedPassword,
-				isAdmin,
+				role,
 			});
 
 			return res.status(201).json({
@@ -91,8 +85,7 @@ const UserController = {
 	async editUser(req, res) {
 		try {
 			const userId = req.params.id; // Récupéreration l'ID de l'utilisateur à éditer
-			const { firstname, lastname, username, email, isAdmin } =
-				req.body;
+			const { firstname, lastname, username, email, role } = req.body;
 
 			// Vérification si l'utilisateur existe
 			const existingUser = await User.findByPk(userId);
@@ -108,7 +101,7 @@ const UserController = {
 			existingUser.lastname = lastname;
 			existingUser.username = username;
 			existingUser.email = email;
-			existingUser.isAdmin = isAdmin;
+			existingUser.role = role;
 
 			// Enregistrement des modifications
 			await existingUser.save();
