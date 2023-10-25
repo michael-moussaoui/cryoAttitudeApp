@@ -40,8 +40,12 @@ app.get("/", (req, res) => {
 
 const db = require("./models");
 
+db.sequelize.sync();
+
 if (typeof PhusionPassenger !== "undefined") {
 	app.listen("passenger");
 } else {
-	app.listen(process.env.SERVER_PORT);
+	app.listen(process.env.SERVER_PORT, () => {
+		console.log("server running to port 8087");
+	});
 }
