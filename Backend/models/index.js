@@ -51,7 +51,7 @@ db.sessionPicture = require("../models/sessionPicture.model.js")(
 db.user.hasMany(db.sessionPicture);
 db.user.hasMany(db.session);
 db.session.hasMany(db.category);
-db.session.hasMany(db.user);
+
 db.session.hasOne(db.sessionPicture, {
 	foreignKey: "id_sessionId",
 	onDelete: "CASCADE",

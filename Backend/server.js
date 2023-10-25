@@ -39,8 +39,10 @@ app.get("/", (req, res) => {
 });
 
 const userRoutes = require("./routes/user.routes");
+const categoryRoutes = require("./routes/category.routes");
 
 app.use(userRoutes);
+app.use(categoryRoutes);
 
 const db = require("./models");
 

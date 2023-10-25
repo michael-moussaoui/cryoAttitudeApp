@@ -27,7 +27,14 @@ const UserController = {
 	async getUserById(req, res) {
 		try {
 			const response = await User.findOne({
-				attributes: ["id", "firstname", "lastname", "role", "email"],
+				attributes: [
+					"id",
+					"firstname",
+					"lastname",
+					"username",
+					"isAdmin",
+					"email",
+				],
 				where: {
 					id: req.params.id,
 				},
@@ -40,7 +47,14 @@ const UserController = {
 
 	async addUser(req, res) {
 		try {
-			const { firstname, lastname, email, password, role } = req.body;
+			const {
+				firstname,
+				lastname,
+				username,
+				email,
+				password,
+				isAdmin,
+			} = req.body;
 
 			// Vérification si l'utilisateur existe déjà
 			const existingUser = await User.findOne({ where: { email } });
@@ -56,9 +70,10 @@ const UserController = {
 			const newUser = await User.create({
 				firstname,
 				lastname,
+				username,
 				email,
 				password: hashedPassword,
-				role,
+				isAdmin,
 			});
 
 			return res.status(201).json({
@@ -76,7 +91,8 @@ const UserController = {
 	async editUser(req, res) {
 		try {
 			const userId = req.params.id; // Récupéreration l'ID de l'utilisateur à éditer
-			const { firstname, lastname, email, role } = req.body;
+			const { firstname, lastname, username, email, isAdmin } =
+				req.body;
 
 			// Vérification si l'utilisateur existe
 			const existingUser = await User.findByPk(userId);
@@ -90,8 +106,9 @@ const UserController = {
 			// Mise à jour des informations de l'utilisateur
 			existingUser.firstname = firstname;
 			existingUser.lastname = lastname;
+			existingUser.username = username;
 			existingUser.email = email;
-			existingUser.role = role;
+			existingUser.isAdmin = isAdmin;
 
 			// Enregistrement des modifications
 			await existingUser.save();
