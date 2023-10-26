@@ -41,7 +41,7 @@ const OrientationController = {
 			const { name } = req.body;
 
 			// Vérification si la catégorie existe déjà
-			const existingOrientation = await Category.findOne({
+			const existingOrientation = await Orientation.findOne({
 				where: { name },
 			});
 			if (existingOrientation) {

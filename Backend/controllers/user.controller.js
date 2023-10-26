@@ -32,7 +32,7 @@ const UserController = {
 					"firstname",
 					"lastname",
 					"username",
-					"role",
+					"userRole",
 					"email",
 				],
 				where: {
@@ -47,8 +47,14 @@ const UserController = {
 
 	async addUser(req, res) {
 		try {
-			const { firstname, lastname, username, email, password, role } =
-				req.body;
+			const {
+				firstname,
+				lastname,
+				username,
+				email,
+				password,
+				userRole,
+			} = req.body;
 
 			// Vérification si l'utilisateur existe déjà
 			const existingUser = await User.findOne({ where: { email } });
@@ -67,7 +73,7 @@ const UserController = {
 				username,
 				email,
 				password: hashedPassword,
-				role,
+				userRole,
 			});
 
 			return res.status(201).json({
@@ -85,7 +91,8 @@ const UserController = {
 	async editUser(req, res) {
 		try {
 			const userId = req.params.id; // Récupéreration l'ID de l'utilisateur à éditer
-			const { firstname, lastname, username, email, role } = req.body;
+			const { firstname, lastname, username, email, userRole } =
+				req.body;
 
 			// Vérification si l'utilisateur existe
 			const existingUser = await User.findByPk(userId);
@@ -101,7 +108,7 @@ const UserController = {
 			existingUser.lastname = lastname;
 			existingUser.username = username;
 			existingUser.email = email;
-			existingUser.role = role;
+			existingUser.userRole = userRole;
 
 			// Enregistrement des modifications
 			await existingUser.save();
@@ -114,6 +121,37 @@ const UserController = {
 			return res.status(500).json({
 				message:
 					"Une erreur est survenue lors de la mise à jour de l'utilisateur",
+			});
+		}
+	},
+	async updateUserRole(req, res) {
+		try {
+			const userId = req.params.id; // Récupération de l'ID de l'utilisateur à mettre à jour
+			const { userRole } = req.body; // Récupération du nouveau rôle de l'utilisateur
+
+			// Vérification si l'utilisateur existe
+			const existingUser = await User.findByPk(userId);
+
+			if (!existingUser) {
+				return res
+					.status(404)
+					.json({ message: "Utilisateur non trouvé" });
+			}
+
+			// Mise à jour le champ "userRole" de l'utilisateur
+			existingUser.userRole = userRole;
+
+			// Enregistrements des modifications dans la base de données
+			await existingUser.save();
+
+			return res.status(200).json({
+				user: existingUser,
+				message: "Rôle de l'utilisateur mis à jour avec succès",
+			});
+		} catch (error) {
+			return res.status(500).json({
+				message:
+					"Une erreur est survenue lors de la mise à jour du rôle de l'utilisateur",
 			});
 		}
 	},

@@ -40,7 +40,7 @@ const SessionController = {
 		try {
 			const userId = req.params.userId;
 			const sessions = await Session.findAll({
-				where: { userId }, // Filtrage des session par ID d'utilisateur
+				where: { userId }, // Filtrage des sessions par ID d'utilisateur
 			});
 
 			res.status(200).json(sessions);
