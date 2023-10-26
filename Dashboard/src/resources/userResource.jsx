@@ -9,12 +9,12 @@ import {
 	ShowButton,
 	Create,
 	PasswordInput,
-	SelectInput,
+	// SelectInput,
 	Filter,
 	TopToolbar,
 	PrevNextButtons,
 	SearchInput,
-	ReferenceInput,
+	// ReferenceInput,
 } from "react-admin";
 
 const UserFilter = (props) => (
@@ -36,7 +36,7 @@ export const UserList = (props) => (
 			<TextField source="lastname" label="Nom" />
 			<TextField source="username" label="Pseudo" />
 			<TextField source="email" />
-			<TextField source="role" />
+			<TextField source="userRole" />
 			<EditButton label="Modifier" />
 			<ShowButton label="Voir" />
 		</Datagrid>
@@ -54,14 +54,16 @@ export const UserEdit = (props) => (
 		}
 	>
 		<SimpleForm>
-			<TextInput disabled label="Id" source="id" />
+			<TextInput disabled label="Id" source="ID" />
 			<TextInput label="firstname" source="firstname" />
 			<TextInput label="lastname" source="lastname" />
 			<TextInput label="username" source="username" />
 			<TextInput label="email" source="email" />
-			<ReferenceInput label="Role" source="RoleId" reference="roles">
+			<TextInput label="role" source="userRole" />
+
+			{/* <ReferenceInput label="Role" source="roleId" reference="roles">
 				<SelectInput optionText="name" />
-			</ReferenceInput>
+			</ReferenceInput> */}
 		</SimpleForm>
 	</Edit>
 );
@@ -72,9 +74,10 @@ export const UserCreate = (props) => (
 			<TextInput source="lastname" />
 			<TextInput source="username" />
 			<TextInput source="email" />
-			<ReferenceInput label="Role" source="RoleId" reference="roles">
+			<TextInput label="role" source="userRole" />
+			{/* <ReferenceInput label="Role" source="roleId" reference="roles">
 				<SelectInput optionText="name" />
-			</ReferenceInput>
+			</ReferenceInput> */}
 			<PasswordInput source="password" />
 		</SimpleForm>
 	</Create>
