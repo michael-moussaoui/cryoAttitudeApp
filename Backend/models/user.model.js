@@ -4,7 +4,7 @@ module.exports = (sequelize) => {
 	const User = sequelize.define(
 		"user",
 		{
-			ID: {
+			id: {
 				type: DataTypes.INTEGER,
 				primaryKey: true,
 				autoIncrement: true,
@@ -49,7 +49,7 @@ module.exports = (sequelize) => {
 				},
 			},
 
-			role: {
+			userRole: {
 				type: DataTypes.STRING,
 				validate: {
 					isIn: {

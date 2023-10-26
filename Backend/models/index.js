@@ -51,21 +51,20 @@ db.role = require("../models/role.model.js")(sequelize, Sequelize);
 
 db.user.hasMany(db.sessionPicture);
 db.user.hasMany(db.session);
-db.session.hasMany(db.category);
+db.category.hasMany(db.session);
+db.role.hasMany(db.user);
 
 db.session.hasOne(db.sessionPicture, {
-	foreignKey: "id_sessionId",
+	foreignKey: "sessionId",
 	onDelete: "CASCADE",
 });
 db.sessionPicture.belongsTo(db.user);
+db.user.belongsTo(db.role);
 db.objectiveChoice.belongsTo(db.objective, {
 	foreignKey: "id_objective",
 });
 db.objectiveChoice.belongsTo(db.orientation, {
 	foreignKey: "id_orientation",
 });
-
-db.user.belongsToMany(db.role, { through: "userRoles" });
-db.role.belongsToMany(db.user, { through: "userRoles" });
 
 module.exports = db;

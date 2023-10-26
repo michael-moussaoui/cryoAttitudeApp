@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
 	const Orientation = sequelize.define(
-		"orientation",
+		"orientations",
 		{
 			id: {
 				type: Sequelize.INTEGER,
