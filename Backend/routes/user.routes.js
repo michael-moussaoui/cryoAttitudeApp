@@ -9,4 +9,6 @@ router.post("/api/users", controller.addUser);
 router.put("/api/users/:id", controller.editUser);
 router.delete("/api/users/:id", controller.deleteUser);
 
+router.put("/api/users/:id/updateRole", controller.updateUserRole);
+
 module.exports = router;
